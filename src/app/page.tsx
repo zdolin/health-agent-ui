@@ -1,61 +1,117 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useState, useRef, useEffect } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function Home() {
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const responseRef = useRef<HTMLDivElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!prompt.trim()) return;
+
+    setIsLoading(true);
+    setResponse("");
+
+    try {
+      const response = await fetch("https://api.beans.link/triage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ description: prompt }),
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error("No reader available");
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const text = new TextDecoder().decode(value, { stream: true });
+        setResponse((prev) => prev + text);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setResponse("An error occurred while fetching the response.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Auto-scroll to bottom when response updates
+  useEffect(() => {
+    if (responseRef.current) {
+      responseRef.current.scrollTop = responseRef.current.scrollHeight;
+    }
+  }, [response]);
+
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 max-w-4xl mx-auto">
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight">
-          Welcome to Health Agent
+          Health Agent Assistant
         </h1>
         <p className="text-muted-foreground">
-          Your AI-powered health assistant
+          Describe your symptoms or health concerns to get started
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Health Assessment</CardTitle>
-            <CardDescription>
-              Get a comprehensive health assessment
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button>Start Assessment</Button>
-          </CardContent>
-        </Card>
+      <Card className="flex-1">
+        <CardContent className="p-6">
+          <div className="flex flex-col h-[600px]">
+            <div
+              ref={responseRef}
+              className="flex-1 overflow-y-auto mb-4 p-4 rounded-lg bg-muted/50"
+            >
+              {response ? (
+                <div className="prose prose-sm max-w-none">
+                  {response.split("\n").map((line, i) => (
+                    <p key={i} className="animate-fade-in">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-muted-foreground text-center h-full flex items-center justify-center">
+                  Your health assessment will appear here...
+                </div>
+              )}
+            </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Medical History</CardTitle>
-            <CardDescription>
-              View and manage your medical history
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button variant="outline">View History</Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Health Goals</CardTitle>
-            <CardDescription>
-              Track your health and wellness goals
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button variant="outline">Set Goals</Button>
-          </CardContent>
-        </Card>
-      </div>
+            <form onSubmit={handleSubmit} className="flex gap-2">
+              <Input
+                value={prompt}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setPrompt(e.target.value)
+                }
+                placeholder="Describe your symptoms or health concerns..."
+                disabled={isLoading}
+                className="flex-1"
+              />
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+            </form>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
