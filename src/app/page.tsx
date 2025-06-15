@@ -68,18 +68,62 @@ export default function Home() {
 
       <Card className="flex-1">
         <CardContent className="p-6">
-          <div className="flex flex-col h-[600px]">
+          <div className="flex flex-col h-[calc(100vh-16rem)]">
             <div
               ref={responseRef}
               className="flex-1 overflow-y-auto mb-4 p-4 rounded-lg bg-muted/50"
             >
               {response ? (
-                <div className="prose prose-sm max-w-none">
-                  {response.split("\n").map((line, i) => (
-                    <p key={i} className="animate-fade-in">
-                      {line}
-                    </p>
-                  ))}
+                <div className="prose prose-sm max-w-none space-y-4">
+                  {response.split("\n").map((line, i) => {
+                    // Skip empty lines
+                    if (!line.trim()) return null;
+
+                    // Style different types of messages
+                    if (line.startsWith("🔍")) {
+                      return (
+                        <div
+                          key={i}
+                          className="bg-blue-50 p-3 rounded-lg border border-blue-200"
+                        >
+                          <p className="text-blue-800">{line}</p>
+                        </div>
+                      );
+                    } else if (line.startsWith("💊")) {
+                      return (
+                        <div
+                          key={i}
+                          className="bg-green-50 p-3 rounded-lg border border-green-200"
+                        >
+                          <p className="text-green-800">{line}</p>
+                        </div>
+                      );
+                    } else if (line.startsWith("⚠️")) {
+                      return (
+                        <div
+                          key={i}
+                          className="bg-yellow-50 p-3 rounded-lg border border-yellow-200"
+                        >
+                          <p className="text-yellow-800">{line}</p>
+                        </div>
+                      );
+                    } else if (line.startsWith("📝")) {
+                      return (
+                        <div
+                          key={i}
+                          className="bg-purple-50 p-3 rounded-lg border border-purple-200"
+                        >
+                          <p className="text-purple-800">{line}</p>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <p key={i} className="animate-fade-in">
+                        {line}
+                      </p>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="text-muted-foreground text-center h-full flex items-center justify-center">
