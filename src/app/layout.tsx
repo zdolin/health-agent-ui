@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { HeartPulse } from "lucide-react";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Health Agent UI",
-  description: "AI-powered health assistant interface",
+  title: "Health & Rx Agent",
+  description: "AI-powered health and Rx information assistant interface (POC)",
 };
 
 export default function RootLayout({
@@ -29,7 +30,8 @@ export default function RootLayout({
             <div className="container flex h-14 items-center">
               <div className="mr-4 flex">
                 <Link className="mr-6 flex items-center space-x-2" href="/">
-                  <span className="font-bold">Health Agent</span>
+                  <HeartPulse className="h-5 w-5" />
+                  <h1 className="font-bold">Health & Rx Assistant POC</h1>
                 </Link>
               </div>
             </div>

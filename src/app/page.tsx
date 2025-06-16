@@ -93,11 +93,17 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">
-          Health Agent Assistant
-        </h1>
+        <div className="bg-red-50 border border-red-200 p-4 rounded-lg mb-4">
+          <p className="text-red-800 font-medium text-sm">
+            ⚠️ DISCLAIMER: This is a Proof of Concept (POC) only. This tool is
+            not intended to provide medical advice, diagnosis, or treatment.
+            Always consult with qualified healthcare professionals for medical
+            decisions.
+          </p>
+        </div>
         <p className="text-muted-foreground">
-          Describe your symptoms or health concerns to get started
+          Describe your symptoms, health concerns, or medication-related
+          questions to get started.
         </p>
       </div>
 
@@ -187,7 +193,7 @@ export default function Home() {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setPrompt(e.target.value)
                 }
-                placeholder="Describe your symptoms or health concerns..."
+                placeholder="Describe your symptoms or medication-related concerns..."
                 disabled={isLoading}
                 className="flex-1"
               />
