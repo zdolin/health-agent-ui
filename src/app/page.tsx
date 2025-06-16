@@ -54,8 +54,8 @@ export default function Home() {
     setResponse("");
 
     try {
-      const response = await fetch("http://localhost:8000/triage", {
-        // const response = await fetch("https://api.beans.link/triage", {
+      //const response = await fetch("http://localhost:8000/triage", {
+      const response = await fetch("https://api.beans.link/triage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
