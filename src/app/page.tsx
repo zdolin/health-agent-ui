@@ -155,10 +155,10 @@ export default function Home() {
                       return (
                         <div
                           key={i}
-                          className="bg-gray-50 p-3 rounded-lg border border-gray-200"
+                          className="bg-gray-50/70 p-3 rounded-lg border border-gray-200/70"
                         >
                           <p
-                            className="text-gray-600 text-sm"
+                            className="text-gray-500 text-sm"
                             dangerouslySetInnerHTML={{
                               __html: line.replace("💬 ", ""),
                             }}
