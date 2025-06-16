@@ -119,7 +119,7 @@ export default function Home() {
                       return (
                         <div
                           key={i}
-                          className="bg-blue-50 p-3 rounded-lg border border-blue-200"
+                          className="bg-blue-50 p-3 rounded-lg border border-blue-200 animate-[pulse_2s_ease-in-out_infinite]"
                         >
                           <p className="text-blue-800">{line}</p>
                         </div>
@@ -128,7 +128,7 @@ export default function Home() {
                       return (
                         <div
                           key={i}
-                          className="bg-green-50 p-3 rounded-lg border border-green-200"
+                          className="bg-green-50 p-3 rounded-lg border border-green-200 animate-[pulse_2s_ease-in-out_infinite]"
                         >
                           <p className="text-green-800">{line}</p>
                         </div>
@@ -137,7 +137,7 @@ export default function Home() {
                       return (
                         <div
                           key={i}
-                          className="bg-yellow-50 p-3 rounded-lg border border-yellow-200"
+                          className="bg-yellow-50 p-3 rounded-lg border border-yellow-200 animate-[pulse_2s_ease-in-out_infinite]"
                         >
                           <p className="text-yellow-800">{line}</p>
                         </div>
@@ -146,7 +146,7 @@ export default function Home() {
                       return (
                         <div
                           key={i}
-                          className="bg-purple-50 p-3 rounded-lg border border-purple-200"
+                          className="bg-purple-50 p-3 rounded-lg border border-purple-200 animate-[pulse_2s_ease-in-out_infinite]"
                         >
                           <p className="text-purple-800">{line}</p>
                         </div>
