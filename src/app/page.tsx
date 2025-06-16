@@ -6,6 +6,40 @@ import { Input } from "@/components/ui/input";
 import { useState, useRef, useEffect } from "react";
 import { Loader2 } from "lucide-react";
 
+// Add URL detection function
+const isUrl = (text: string) => {
+  if (!text.includes("http")) {
+    return false;
+  }
+  try {
+    new URL(text);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+// Add function to convert text with URLs to JSX
+const renderTextWithUrls = (text: string) => {
+  const words = text.split(/(\s+)/);
+  return words.map((word, i) => {
+    if (isUrl(word)) {
+      return (
+        <a
+          key={i}
+          href={word}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:underline"
+        >
+          {word}
+        </a>
+      );
+    }
+    return word;
+  });
+};
+
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
@@ -20,7 +54,8 @@ export default function Home() {
     setResponse("");
 
     try {
-      const response = await fetch("https://api.beans.link/triage", {
+      const response = await fetch("http://localhost:8000/triage", {
+        // const response = await fetch("https://api.beans.link/triage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +155,7 @@ export default function Home() {
 
                     return (
                       <p key={i} className="animate-fade-in">
-                        {line}
+                        {renderTextWithUrls(line)}
                       </p>
                     );
                   })}
