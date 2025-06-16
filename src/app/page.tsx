@@ -157,7 +157,12 @@ export default function Home() {
                           key={i}
                           className="bg-gray-50 p-3 rounded-lg border border-gray-200"
                         >
-                          <p className="text-gray-600 text-sm">{line}</p>
+                          <p
+                            className="text-gray-600 text-sm"
+                            dangerouslySetInnerHTML={{
+                              __html: line.replace("💬 ", ""),
+                            }}
+                          />
                         </div>
                       );
                     }
