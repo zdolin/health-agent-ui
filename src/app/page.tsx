@@ -151,6 +151,15 @@ export default function Home() {
                           <p className="text-purple-800">{line}</p>
                         </div>
                       );
+                    } else if (line.startsWith("💬")) {
+                      return (
+                        <div
+                          key={i}
+                          className="bg-gray-50 p-3 rounded-lg border border-gray-200"
+                        >
+                          <p className="text-gray-600 text-sm">{line}</p>
+                        </div>
+                      );
                     }
 
                     return (
