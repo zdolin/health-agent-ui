@@ -92,7 +92,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 px-4 sm:px-0">
         <div className="bg-red-50 border border-red-200 p-4 rounded-lg mb-4">
           <p className="text-red-800 font-medium text-sm">
             ⚠️ DISCLAIMER: This is a Proof of Concept (POC) only. This tool is
@@ -109,7 +109,7 @@ export default function Home() {
 
       <Card className="flex-1">
         <CardContent className="p-6">
-          <div className="flex flex-col h-[calc(100vh-16rem)]">
+          <div className="flex flex-col h-[calc(100vh-16rem)] relative">
             <div
               ref={responseRef}
               className="flex-1 overflow-y-auto mb-4 p-4 rounded-lg bg-muted/50"
@@ -187,27 +187,29 @@ export default function Home() {
               )}
             </div>
 
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <Input
-                value={prompt}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setPrompt(e.target.value)
-                }
-                placeholder="Describe your symptoms or medication-related concerns..."
-                disabled={isLoading}
-                className="flex-1"
-              />
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  "Submit"
-                )}
-              </Button>
-            </form>
+            <div className="sticky bottom-0 bg-background pt-4 pb-4 border-t">
+              <form onSubmit={handleSubmit} className="flex gap-3">
+                <Input
+                  value={prompt}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setPrompt(e.target.value)
+                  }
+                  placeholder="Describe your symptoms or medication-related concerns..."
+                  disabled={isLoading}
+                  className="flex-1"
+                />
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    "Submit"
+                  )}
+                </Button>
+              </form>
+            </div>
           </div>
         </CardContent>
       </Card>
