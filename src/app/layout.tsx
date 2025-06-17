@@ -27,7 +27,7 @@ export default function RootLayout({
       >
         <div className="relative flex min-h-screen flex-col container mx-auto">
           <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container flex h-14 items-center">
+            <div className="container flex h-14 items-center px-4 sm:px-0">
               <div className="mr-4 flex">
                 <Link className="mr-6 flex items-center space-x-2" href="/">
                   <HeartPulse className="h-5 w-5" />

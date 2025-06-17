@@ -183,7 +183,7 @@ export default function Home() {
                   })}
                 </div>
               ) : (
-                <div className="text-muted-foreground text-center h-full flex items-center justify-center">
+                <div className="text-muted-foreground text-center h-full flex sm:items-center justify-center py-4 sm:py-0">
                   Your health assessment will appear here...
                 </div>
               )}
@@ -196,7 +196,7 @@ export default function Home() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setPrompt(e.target.value)
                   }
-                  placeholder="Describe your symptoms or medication-related concerns..."
+                  placeholder="Can taking Nexium cause nausea?"
                   disabled={isLoading}
                   className="flex-1"
                 />
