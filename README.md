@@ -74,13 +74,6 @@ src/
     └── utils.ts       # Helper utilities
 ```
 
-### Key Components
-
-- **Main Chat Interface**: Real-time health assessment with streaming responses
-- **Responsive Design**: Adapts to different screen sizes
-- **URL Detection**: Automatically detects and makes URLs clickable
-- **Loading States**: Visual feedback during API calls
-
 ## Deployment
 
 The application is deployed on Vercel and automatically updates on pushes to the main branch.
