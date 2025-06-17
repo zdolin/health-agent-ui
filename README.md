@@ -1,6 +1,6 @@
 # Health Agent UI
 
-UI for the AI-powered [Health Agent Lab backend](https://github.com/zdolin/health-agent-lab) using Next.js 14, TypeScript, Tailwind CSS, and shadcn/ui.
+Frontend UI for the AI-powered [Health Agent Lab backend](https://github.com/zdolin/health-agent-lab) using Next.js 14, TypeScript, Tailwind CSS, and shadcn/ui.
 
 ⚠️ **DISCLAIMER**: This is a Proof of Concept (POC) only. This tool is not intended to provide medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical decisions.
 
