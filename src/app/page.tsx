@@ -54,14 +54,16 @@ export default function Home() {
     setResponse("");
 
     try {
-      //const response = await fetch("http://localhost:8000/triage", {
-      const response = await fetch("https://api.beans.link/triage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ description: prompt }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/triage`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ description: prompt }),
+        }
+      );
 
       if (!response.ok) throw new Error("Network response was not ok");
 
